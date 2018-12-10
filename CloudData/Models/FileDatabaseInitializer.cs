@@ -7,7 +7,7 @@ using System.Data.Entity;
 namespace CloudData.Models
 {
     public class FileDatabaseInitializer :
-DropCreateDatabaseAlways<FileContext>
+DropCreateDatabaseIfModelChanges<FileContext>
     {
         protected override void Seed(FileContext context)
         {
