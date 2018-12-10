@@ -6,9 +6,9 @@ using System.Data.Entity;
 
 namespace CloudData.Models
 {
-    public class FileContext
+    public class FileContext : DbContext
     {
-        public FileContext() : base ("CloudData")
+        public FileContext() : base("CloudData")
         {
         }
         public DbSet<Category> Categories { get; set; }

@@ -21,7 +21,7 @@ namespace CloudData
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // Initialize the product database.
-            Database.SetInitializer (new FileDatabaseInitializer());
+            Database.SetInitializer(new FileDatabaseInitializer());
         }
     }
 }
