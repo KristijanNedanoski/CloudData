@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Files" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FileList.aspx.cs" Inherits="CloudData.FileList" %>
+﻿<%@ Page Title="Files" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="FileList.aspx.cs" Inherits="CloudData.FileList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <section>
