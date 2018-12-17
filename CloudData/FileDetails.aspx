@@ -12,7 +12,7 @@
             <table>
                 <tr>
                     <td>
-                        <img src="/Catalog/Images/<%#:Item.ImagePath %>"
+                        <img src="/Catalog/Images/<%#:Item.FilePath%>"
                             style="border: solid; height: 300px" alt="<%#:Item.FileName %>" />
                     </td>
                     <td>&nbsp;</td>
@@ -20,7 +20,7 @@
                         <b>Description:</b><br />
                         <%#:Item.Description %>
                         <br />
-                        <span><b>Price:</b>&nbsp;<%#: String.Format("{0:c}",Item.UnitPrice) %></span>
+                        <span><b>Price:</b>&nbsp;<%#: String.Format("{0:c}",Item.FileSize) %></span>
                         <br />
                         <span><b>File Number:</b>&nbsp;<%#:Item.FileID
                         %></span>

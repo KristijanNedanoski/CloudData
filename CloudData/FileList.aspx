@@ -32,7 +32,7 @@
                                     <a
                                         href="FileDetails.aspx?fileID=<%#:Item.FileID%>">
                                         <img
-                                            src="/Catalog/Images/Thumbs/<%#:Item.ImagePath%>"
+                                            src="<%#:Item.FilePath%><%#:Item.FileName%>"
                                             width="100" height="75" style="border: solid" /></a>
                                 </td>
                             </tr>
@@ -46,7 +46,7 @@
                                     </a>
                                     <br />
                                     <span>
-                                        <b>Price: </b><%#:String.Format("{0:c}",Item.UnitPrice)%>
+                                        <b>Size: </b><%#:Math.Round((float)Item.FileSize / (1024 * 1024), 2)%> <b> MB</b>
                                     </span>
                                     <br />
                                 </td>

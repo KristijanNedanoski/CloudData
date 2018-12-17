@@ -15,9 +15,9 @@ namespace CloudData.Models
         [Required, StringLength(10000), Display(Name = "File Description"),
         DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        public string ImagePath { get; set; }
-        [Display(Name = "Price")]
-        public double? UnitPrice { get; set; }
+        public string FilePath { get; set; }
+        [Display(Name = "Size")]
+        public double? FileSize { get; set; }
         public int? CategoryID { get; set; }
         public virtual Category Category { get; set; }
     }

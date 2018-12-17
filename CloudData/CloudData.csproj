@@ -384,6 +384,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\AddFiles.cs" />
     <Compile Include="Logic\RoleActions.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\File.cs" />
@@ -422,6 +423,7 @@
     <Folder Include="Admin\" />
     <Folder Include="App_Data\" />
     <Folder Include="Catalog\" />
+    <Folder Include="User\Files\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
