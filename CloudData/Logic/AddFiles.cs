@@ -13,13 +13,14 @@ namespace CloudData.Logic
 {
     public class AddFiles
     {
-        public bool AddFile(string FileName, string FileDesc, int FileSize, string FileLocation)
+        public bool AddFile(string FileName, string FileDesc, int FileSize, string FileLocation, int FileCategory)
         {
             var myFile = new Models.File();
             myFile.FileName = FileName;
             myFile.Description = FileDesc;
             myFile.FileSize = Convert.ToDouble(FileSize);
             myFile.FilePath = FileLocation;
+            myFile.CategoryID = FileCategory;
             using (FileContext _db = new FileContext())
             {
                 // Add product to DB.

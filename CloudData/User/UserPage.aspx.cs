@@ -23,10 +23,44 @@ namespace CloudData.User
 
         protected void UploadFile(object sender, EventArgs e)
         {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
             string fLoc = "~/User/Files/" + Context.User.Identity.GetUserName() + "/";
             string folderPath = Server.MapPath(fLoc);
+
+            int fCat = 0;
+
+            if (Path.GetExtension(FileUpload1.FileName) == ".jpg" || Path.GetExtension(FileUpload1.FileName) == ".png" || Path.GetExtension(FileUpload1.FileName) == ".gif"
+                || Path.GetExtension(FileUpload1.FileName) == ".webp")
+            {
+                fCat = 1;
+            }
+            else if (Path.GetExtension(FileUpload1.FileName) == ".txt" || Path.GetExtension(FileUpload1.FileName) == ".pdf" || Path.GetExtension(FileUpload1.FileName) == ".doc"
+                  || Path.GetExtension(FileUpload1.FileName) == ".docx" || Path.GetExtension(FileUpload1.FileName) == ".tex" || Path.GetExtension(FileUpload1.FileName) == ".c"
+                  || Path.GetExtension(FileUpload1.FileName) == ".java" || Path.GetExtension(FileUpload1.FileName) == ".cpp" || Path.GetExtension(FileUpload1.FileName) == ".cs"
+                  || Path.GetExtension(FileUpload1.FileName) == ".class")
+            {
+                fCat = 3;
+            }
+            else if (Path.GetExtension(FileUpload1.FileName) == ".mp4" || Path.GetExtension(FileUpload1.FileName) == ".wmv" || Path.GetExtension(FileUpload1.FileName) == ".mpg"
+                 || Path.GetExtension(FileUpload1.FileName) == ".avi" || Path.GetExtension(FileUpload1.FileName) == ".m4v")
+            {
+                fCat = 2;
+            }
+
+            else if (Path.GetExtension(FileUpload1.FileName) == ".zip" || Path.GetExtension(FileUpload1.FileName) == ".rar" || Path.GetExtension(FileUpload1.FileName) == ".war" ||
+                     Path.GetExtension(FileUpload1.FileName) == ".xar" || Path.GetExtension(FileUpload1.FileName) == ".pit" || Path.GetExtension(FileUpload1.FileName) == ".dar")
+            {
+                fCat = 4;
+            }
+
+            else if (Path.GetExtension(FileUpload1.FileName) == ".exe" || Path.GetExtension(FileUpload1.FileName) == ".jar" || Path.GetExtension(FileUpload1.FileName) == ".wsf"
+                || Path.GetExtension(FileUpload1.FileName) == ".bin" || Path.GetExtension(FileUpload1.FileName) == ".py")
+            {
+                fCat = 5;
+            }
+            else 
+            {
+                fCat = 6;
+            }
 
             //Check whether Directory (Folder) exists.
             if (!Directory.Exists(folderPath))
@@ -42,7 +76,7 @@ namespace CloudData.User
             lblMessage.Text = Path.GetFileName(FileUpload1.FileName) + " has been uploaded.";
 
             AddFiles files = new AddFiles();
-            files.AddFile(FileUpload1.FileName, AddFileDescription.Text, FileUpload1.PostedFile.ContentLength, folderPath);
+            files.AddFile(FileUpload1.FileName, AddFileDescription.Text, FileUpload1.PostedFile.ContentLength, folderPath, fCat);
         }
     }
 }
