@@ -12,6 +12,8 @@ namespace CloudData.Models
         public int FileID { get; set; }
         [Required, StringLength(100), Display(Name = "Name")]
         public string FileName { get; set; }
+        [Required, StringLength(100), Display(Name = "Owner")]
+        public string OwnerName { get; set; }
         [Required, StringLength(10000), Display(Name = "File Description"),
         DataType(DataType.MultilineText)]
         public string Description { get; set; }

@@ -35,7 +35,8 @@ namespace CloudData.Logic
             // object. Note that you can create new objects and use them as parameters in
             // a single line of code, rather than using multiple lines of code, as you did
             // for the RoleManager object.
-            var userMgr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var userMgr = new UserManager<ApplicationUser>(new
+            UserStore<ApplicationUser>(context));
             var appUser = new ApplicationUser()
             {
                 UserName = "Admin@Admin",
@@ -49,12 +50,12 @@ namespace CloudData.Logic
                 if (!IdUserResult.Succeeded)
                 {
                     // Handle the error condition if there's a problem adding the user to the role.
+}
                 }
-            }
-            else
-            {
-                // Handle the error condition if there's a problem creating the new user.
-            }
+                else
+                {
+                    // Handle the error condition if there's a problem creating the newuser.
+                }
         }
     }
 }
