@@ -30,6 +30,14 @@ namespace CloudData.User
             //User who uploaded the file and has access to it.
             string ownerName = Context.User.Identity.GetUserName();
 
+            //File original name.
+            string originalName = FileUpload1.FileName;
+
+            //Encoded name
+            string encodedName = Path.GetRandomFileName();
+            encodedName = encodedName.Replace(".", "");
+            encodedName = encodedName + Path.GetExtension(FileUpload1.FileName);
+
             //Figures out what Category the File will belong to.
             int fCat = 0;
 
@@ -45,7 +53,7 @@ namespace CloudData.User
                      Path.GetExtension(FileUpload1.FileName) == ".wmv" || Path.GetExtension(FileUpload1.FileName) == ".WMV" ||
                      Path.GetExtension(FileUpload1.FileName) == ".mpg" || Path.GetExtension(FileUpload1.FileName) == ".MPG" ||
                      Path.GetExtension(FileUpload1.FileName) == ".avi" || Path.GetExtension(FileUpload1.FileName) == ".AVI" ||
-                     Path.GetExtension(FileUpload1.FileName) == ".M4V" || Path.GetExtension(FileUpload1.FileName) == ".m4v")
+                     Path.GetExtension(FileUpload1.FileName) == ".m4v" || Path.GetExtension(FileUpload1.FileName) == ".M4V")
             {
                 fCat = 2;
             }
@@ -95,14 +103,14 @@ namespace CloudData.User
             }
 
             //Save the File to the Directory (Folder).
-            FileUpload1.SaveAs(folderPath + Path.GetFileName(FileUpload1.FileName));
+            FileUpload1.SaveAs(folderPath + encodedName);
 
             //Display the success message.
             lblMessage.Text = Path.GetFileName(FileUpload1.FileName) + " has been uploaded.";
 
             //Add File info to the Database.
             AddFiles files = new AddFiles();
-            files.AddFile(FileUpload1.FileName, AddFileDescription.Text, FileUpload1.PostedFile.ContentLength, fLoc, fCat, ownerName);
+            files.AddFile(encodedName, originalName, AddFileDescription.Text, FileUpload1.PostedFile.ContentLength, fLoc, fCat, ownerName);
         }
     }
 }

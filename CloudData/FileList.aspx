@@ -41,7 +41,7 @@
                                     <a
                                         href="FileDetails.aspx?fileID=<%#:Item.FileID%>">
                                         <span>
-                                            <%#:Item.FileName%>
+                                            <%#:Item.OriginalFileName%>
                                         </span>
                                     </a>
                                     <br />

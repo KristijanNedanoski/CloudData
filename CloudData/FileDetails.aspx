@@ -6,14 +6,14 @@
         RenderOuterTable="false">
         <ItemTemplate>
             <div>
-                <h1><%#:Item.FileName %></h1>
+                <h1><%#:Item.OriginalFileName %></h1>
             </div>
             <br />
             <table>
                 <tr>
                     <td>
                         <img src="<%#:Item.FilePath%><%#:Item.FileName%>"
-                            style="border: solid; height: 300px" alt="<%#:Item.FileName %>" />
+                            style="border: solid; height: 300px" alt="<%#:Item.OriginalFileName%>" />
                     </td>
                     <td>&nbsp;</td>
                     <td style="vertical-align: top; text-align: left;">
@@ -26,19 +26,11 @@
                         <span><a href="Download.ashx?file=<%#:Item.FilePath%><%#:Item.FileName%>">cat pic</a></span>
                         <tr>
                             <td>
-                            <asp:Label ID="LabelRemoveProduct"
-                                     runat="server">File:</asp:Label></td>
-                            <td>
-                                <asp:DropDownList ID="DropDownRemoveFile" runat="server"
-                                    ItemType="CloudData.Models.File"
-                                    SelectMethod="GetFile" AppendDataBoundItems="true"
-                                    DataTextField="FileName" DataValueField="FileID">
-                                </asp:DropDownList>
-                            </td>
-                        </tr>
-                        <asp:Button ID="RemoveFileButton" runat="server" Text="Remove File"
+                            <asp:Button ID="RemoveFileButton" runat="server" Text="Remove File"
                             OnClick="RemoveFileButton_Click" CausesValidation="false" />
                         <asp:Label ID="LabelRemoveStatus" runat="server" Text=""></asp:Label>
+                        </tr>
+                        
                         <br />
                     </td>
                 </tr>

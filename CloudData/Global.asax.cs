@@ -26,7 +26,7 @@ namespace CloudData
 
             // Create the administrator role and user.
             RoleActions roleActions = new RoleActions();
-            roleActions.createAdmin();
+            roleActions.CreateAdmin();
         }
     }
 }

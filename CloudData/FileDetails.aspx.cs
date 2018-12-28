@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -7,6 +8,7 @@ using System.Web.UI.WebControls;
 using CloudData;
 using CloudData.Models;
 using System.Web.ModelBinding;
+using System.Web.Hosting;
 
 namespace CloudData
 {
@@ -17,10 +19,10 @@ namespace CloudData
             
         }
 
-        public IQueryable<File> GetFile([QueryString("fileID")] int? fileId)
+        public IQueryable<Models.File> GetFile([QueryString("fileID")] int? fileId)
         {
             var _db = new CloudData.Models.FileContext();
-            IQueryable<File> query = _db.Files;
+            IQueryable<Models.File> query = _db.Files;
             if (fileId.HasValue && fileId > 0)
             {
                 query = query.Where(p => p.FileID == fileId);
@@ -95,22 +97,24 @@ namespace CloudData
             {
                 using (var _db = new CloudData.Models.FileContext())
                 {
-                    int fileId = FileDetails1.FileID;
-                    var myItem = (from c in _db.Files
+                    int fileId = int.Parse(Request.QueryString["FileId"]);
+                var myFile = (from c in _db.Files
                                   where c.FileID == fileId
                                   select c).FirstOrDefault();
-                    if (myItem != null)
+                    if (myFile != null)
                     {
-                        _db.Files.Remove(myItem);
-                        _db.SaveChanges();
+                    string path = HostingEnvironment.MapPath("~/User/Files/" + myFile.OwnerName + "/");
+                    System.IO.File.Delete(path + myFile.FileName);
+                    _db.Files.Remove(myFile);
+                    _db.SaveChanges();
                         // Reload the page.
                         string pageUrl = Request.Url.AbsoluteUri.Substring(0,
                         Request.Url.AbsoluteUri.Count() - Request.Url.Query.Count());
-                        Response.Redirect(pageUrl + "?ProductAction=remove");
+                        Response.Redirect(pageUrl + "?FileAction=remove");
                     }
                     else
                     {
-                        LabelRemoveStatus.Text = "Unable to locate product.";
+                        LabelRemoveStatus.Text = "Unable to locate file.";
                     }
                 }
             }

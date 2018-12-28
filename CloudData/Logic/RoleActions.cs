@@ -10,7 +10,7 @@ namespace CloudData.Logic
 {
     internal class RoleActions
     {
-        internal void createAdmin()
+        internal void CreateAdmin()
         {
             // Access the application context and create result variables.
             Models.ApplicationDbContext context = new ApplicationDbContext();
@@ -50,12 +50,12 @@ namespace CloudData.Logic
                 if (!IdUserResult.Succeeded)
                 {
                     // Handle the error condition if there's a problem adding the user to the role.
-}
                 }
-                else
-                {
-                    // Handle the error condition if there's a problem creating the newuser.
-                }
+            }
+            else
+            {
+                // Handle the error condition if there's a problem creating the newuser.
+            }
         }
     }
 }

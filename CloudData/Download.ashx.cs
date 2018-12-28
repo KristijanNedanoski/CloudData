@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CloudData.Logic;
+using CloudData.Models;
 using System.Text;
 using System.Web.UI.WebControls.WebParts;
 using Owin;
@@ -17,31 +18,28 @@ namespace CloudData
     /// <summary>
     /// Summary description for Download
     /// </summary>
-    public class Download : IHttpHandler
+    public class DownloadFile : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
         {
-            string file = context.Request.QueryString["file"];
+            string fileId = context.Request.QueryString["FileId"];
+            string folder = context.User.Identity.GetUserName();
+            string serverFilename = "";
+            string filename = "";
 
-            if (!string.IsNullOrEmpty(file) && File.Exists(context.Server.MapPath(file)))
-            {
-                context.Response.Clear();
-                context.Response.ContentType = "application/octet-stream";
-                context.Response.AddHeader("content-disposition", "attachment;filename=" + Path.GetFileName(file));
-                context.Response.WriteFile(context.Server.MapPath(file));
-                // This would be the ideal spot to collect some download statistics and / or tracking  
-                // also, you could implement other requests, such as delete the file after download  
-                context.Response.End();
+            var _db = new CloudData.Models.FileContext();
+            var myItem = (from c in _db.Files
+                          where c.FileID == int.Parse(fileId)
+                          select c).FirstOrDefault();
 
-            }
-            else
-            {
-                context.Response.ContentType = "text/plain";
-                context.Response.Write("File not be found!");
+            string path = context.Server.MapPath("~/Uploads/FileAttachments/" + folder + "/" + serverFilename);
 
-
-            }
+            context.Response.Clear();
+            context.Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+            //context.Response.ContentType = "image/png";
+            context.Response.TransmitFile(path);
+            context.Response.End();
         }
 
         public bool IsReusable
