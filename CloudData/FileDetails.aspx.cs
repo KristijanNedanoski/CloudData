@@ -19,11 +19,11 @@ namespace CloudData
             
         }
 
-        public IQueryable<Models.File> GetFile([QueryString("fileID")] int? fileId)
+        public IQueryable<Models.File> GetFile([QueryString("fileID")] Guid? fileId)
         {
             var _db = new CloudData.Models.FileContext();
             IQueryable<Models.File> query = _db.Files;
-            if (fileId.HasValue && fileId > 0)
+            if (fileId.HasValue)
             {
                 query = query.Where(p => p.FileID == fileId);
             }
@@ -48,56 +48,13 @@ namespace CloudData
             return query;
         }
 
-        /// <summary>
-        /// LabelRemoveProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelRemoveFile;
-
-        /// <summary>
-        /// DropDownRemoveProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownRemoveFile;
-
-        /// <summary>
-        /// RemoveProductButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RemoveProductButton;
-
-        /// <summary>
-        /// LabelRemoveStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelRemoveStatus;
-
-        /// <summary>
-        /// FileDetails1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::CloudData.Models.File FileDetails1;
 
         protected void RemoveFileButton_Click(object sender, EventArgs e)
             {
                 using (var _db = new CloudData.Models.FileContext())
                 {
-                    int fileId = int.Parse(Request.QueryString["FileId"]);
+                    Guid fileId = Guid.Parse(Request.QueryString["FileId"]);
                 var myFile = (from c in _db.Files
                                   where c.FileID == fileId
                                   select c).FirstOrDefault();
@@ -111,7 +68,8 @@ namespace CloudData
                         string pageUrl = Request.Url.AbsoluteUri.Substring(0,
                         Request.Url.AbsoluteUri.Count() - Request.Url.Query.Count());
                         Response.Redirect(pageUrl + "?FileAction=remove");
-                    }
+                        LabelRemoveStatus.Text = "File Removed.";
+                }
                     else
                     {
                         LabelRemoveStatus.Text = "Unable to locate file.";

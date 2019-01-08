@@ -175,6 +175,10 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="App_Data\CloudData.mdf" />
+    <Content Include="App_Data\CloudData_log.ldf">
+      <DependentUpon>CloudData.mdf</DependentUpon>
+    </Content>
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -198,7 +202,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Account\Web.config" />
-    <Content Include="Download.ashx" />
+    <Content Include="DownloadFile.ashx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\CloudData.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -368,8 +372,8 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Download.ashx.cs">
-      <DependentUpon>Download.ashx</DependentUpon>
+    <Compile Include="DownloadFile.ashx.cs">
+      <DependentUpon>DownloadFile.ashx</DependentUpon>
     </Compile>
     <Compile Include="FileDetails.aspx.cs">
       <DependentUpon>FileDetails.aspx</DependentUpon>
@@ -425,7 +429,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
-    <Folder Include="App_Data\" />
     <Folder Include="Catalog\" />
     <Folder Include="User\Files\" />
   </ItemGroup>
