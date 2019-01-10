@@ -202,7 +202,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Account\Web.config" />
-    <Content Include="DownloadFile.ashx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\CloudData.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -371,9 +370,6 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DownloadFile.ashx.cs">
-      <DependentUpon>DownloadFile.ashx</DependentUpon>
     </Compile>
     <Compile Include="FileDetails.aspx.cs">
       <DependentUpon>FileDetails.aspx</DependentUpon>

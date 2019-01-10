@@ -51,31 +51,52 @@ namespace CloudData
         protected global::System.Web.UI.WebControls.Label LabelRemoveStatus;
 
         protected void RemoveFileButton_Click(object sender, EventArgs e)
+        {
+            using (var _db = new CloudData.Models.FileContext())
             {
-                using (var _db = new CloudData.Models.FileContext())
-                {
-                    Guid fileId = Guid.Parse(Request.QueryString["FileId"]);
+                Guid fileId = Guid.Parse(Request.QueryString["FileId"]);
                 var myFile = (from c in _db.Files
                                   where c.FileID == fileId
                                   select c).FirstOrDefault();
-                    if (myFile != null)
-                    {
+                if (myFile != null)
+                {
                     string path = HostingEnvironment.MapPath("~/User/Files/" + myFile.OwnerName + "/");
                     System.IO.File.Delete(path + myFile.FileName);
                     _db.Files.Remove(myFile);
                     _db.SaveChanges();
-                        // Reload the page.
-                        string pageUrl = Request.Url.AbsoluteUri.Substring(0,
-                        Request.Url.AbsoluteUri.Count() - Request.Url.Query.Count());
-                        Response.Redirect(pageUrl + "?FileAction=remove");
-                        LabelRemoveStatus.Text = "File Removed.";
+                    // Reload the page.
+                    string pageUrl = Request.Url.AbsoluteUri.Substring(0,
+                    Request.Url.AbsoluteUri.Count() - Request.Url.Query.Count());
+                    Response.Redirect(pageUrl + "?FileAction=remove");
+                    LabelRemoveStatus.Text = "File Removed.";
                 }
-                    else
-                    {
-                        LabelRemoveStatus.Text = "Unable to locate file.";
-                    }
+                else
+                {
+                    LabelRemoveStatus.Text = "Unable to locate file.";
                 }
             }
-        
+        }
+
+        protected void DownloadFileButton_Click (object sender, EventArgs e)
+        {
+            Guid fileId = Guid.Parse(Request.QueryString["FileId"]);
+            var _db = new CloudData.Models.FileContext();
+            var myItem = (from c in _db.Files
+                          where c.FileID == fileId
+                          select c).FirstOrDefault();
+            string serverFilename = myItem.FileName;
+            string filename = myItem.OriginalFileName;
+            string folder = myItem.OwnerName;
+
+            string path = HostingEnvironment.MapPath("~/User/Files/" + folder + "/" + serverFilename);
+
+            Response.Clear();
+            Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+            //Response.ContentType = "image/png";
+            Response.TransmitFile(path);
+            Response.End();
+        }
+
+
     }
 }

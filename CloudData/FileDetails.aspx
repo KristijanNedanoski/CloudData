@@ -12,6 +12,7 @@
             <table>
                 <tr>
                     <td>
+
                         <img src="<%#:Item.FilePath%><%#:Item.FileName%>"
                             style="border: solid; height: 300px" alt="<%#:Item.OriginalFileName%>" />
                     </td>
@@ -20,20 +21,28 @@
                         <b>Description:</b><br />
                         <%#:Item.Description %>
                         <br />
-                        <span><b>Size: </b><%#:Math.Round((float)Item.FileSize / (1024 * 1024), 2)%> <b> MB</b></span>
+                        <span><b>Size: </b><%#:Math.Round((float)Item.FileSize / (1024 * 1024), 2)%> <b>MB</b></span>
                         <br />
-                        <span><b>File Number:</b>&nbsp;<%#:Item.FileID%></span>
-                        <span><a href="DownloadFile.ashx?file=<%#:Item.FileID%>" >Download</a></span>
-                        <tr>
-                            <td>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+
+                        <span>
+                            <asp:Button ID="Button2" runat="server" Text="Download File"
+                                OnClick="DownloadFileButton_Click" CausesValidation="false" />
+                        </span>
+                        </br>
+                        <span>
                             <asp:Button ID="RemoveFileButton" runat="server" Text="Remove File"
-                            OnClick="RemoveFileButton_Click" CausesValidation="false" />
-                        <asp:Label ID="LabelRemoveStatus" runat="server" Text=""></asp:Label>
-                        </tr>
-                        
-                        <br />
-                    </td>
+                                OnClick="RemoveFileButton_Click" CausesValidation="false" />
+                            <asp:Label ID="LabelRemoveStatus" runat="server" Text=""></asp:Label>
+                        </span>
+
                 </tr>
+                <br />
+                </td>
+    </tr>
             </table>
         </ItemTemplate>
     </asp:FormView>

@@ -16,11 +16,11 @@ namespace CloudData
 
         }
 
-        public IQueryable<File> GetFiles([QueryString("id")] int?
-categoryId)
+        public IQueryable<File> GetFiles([QueryString("id")] int? categoryId)
         {
             var _db = new CloudData.Models.FileContext();
             IQueryable<File> query = _db.Files;
+            query = query.Where(p => p.OwnerName == User.Identity.Name);
             if (categoryId.HasValue && categoryId > 0)
             {
                 query = query.Where(p => p.CategoryID == categoryId);
