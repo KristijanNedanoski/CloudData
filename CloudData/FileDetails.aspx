@@ -23,7 +23,7 @@
                         <span><b>Size: </b><%#:Math.Round((float)Item.FileSize / (1024 * 1024), 2)%> <b> MB</b></span>
                         <br />
                         <span><b>File Number:</b>&nbsp;<%#:Item.FileID%></span>
-                        <span><a href="Download.ashx?file=<%#:Item.FilePath%><%#:Item.FileName%>">cat pic</a></span>
+                        <span><a href="DownloadFile.ashx?file=<%#:Item.FileID%>" >Download</a></span>
                         <tr>
                             <td>
                             <asp:Button ID="RemoveFileButton" runat="server" Text="Remove File"
